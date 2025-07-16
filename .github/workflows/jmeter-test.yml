@@ -43,7 +43,6 @@ jobs:
     - name: Run JMeter test
       run: |
         docker run --rm \
-      
         -v ${{ github.workspace }}/jmeter:/tests \
         -w /tests \
         justb4/jmeter \
