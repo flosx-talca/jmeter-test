@@ -40,9 +40,10 @@ jobs:
           sleep 5
         done
     - name: Check dummy-app logs
+      working-directory: ./dummy-app
       run: |
         docker compose logs app-dummy
-        
+
     - name: Run JMeter test (on Docker network)
       run: |
         docker run --rm \
