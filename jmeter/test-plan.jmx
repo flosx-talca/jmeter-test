@@ -16,7 +16,7 @@
     <hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group">
         <boolProp name="ThreadGroup.delayedStart">true</boolProp>
-        <intProp name="ThreadGroup.num_threads">50</intProp>
+        <intProp name="ThreadGroup.num_threads">10</intProp>
         <intProp name="ThreadGroup.ramp_time">5</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -27,7 +27,7 @@
       </ThreadGroup>
       <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ApiUsuario">
-          <stringProp name="HTTPSampler.domain">${target_host}</stringProp>
+          <stringProp name="HTTPSampler.domain">localhost</stringProp>
           <stringProp name="HTTPSampler.port">3000</stringProp>
           <stringProp name="HTTPSampler.path">/api/ping</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -84,7 +84,7 @@
         </ResultCollector>
         <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request">
-          <stringProp name="HTTPSampler.domain">${target_host}</stringProp>
+          <stringProp name="HTTPSampler.domain">localhost</stringProp>
           <stringProp name="HTTPSampler.port">3000</stringProp>
           <stringProp name="HTTPSampler.path">/api/echo</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
