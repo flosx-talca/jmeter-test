@@ -12,5 +12,5 @@ app.post('/api/echo', (req, res) => {
 
 const port = 3000;
 app.listen(port, '0.0.0.0', () => {
-  console.log(`App listening at http://0.0.0.0:${port}`);
+  console.log(`App listening at http://localhost:${port}`);
 });
