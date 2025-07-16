@@ -10,7 +10,7 @@ app.post('/api/echo', (req, res) => {
     res.json({ received: req.body });
 });
 
-
-app.listen(3000, '0.0.0.0', () => {
+const port = 3000;
+app.listen(port, '0.0.0.0', () => {
   console.log(`App listening at http://0.0.0.0:${port}`);
 });
