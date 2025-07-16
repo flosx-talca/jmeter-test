@@ -39,7 +39,10 @@ jobs:
           echo "Waiting for API..."
           sleep 5
         done
-
+    - name: Check dummy-app logs
+      run: |
+        docker compose logs app-dummy
+        
     - name: Run JMeter test (on Docker network)
       run: |
         docker run --rm \
