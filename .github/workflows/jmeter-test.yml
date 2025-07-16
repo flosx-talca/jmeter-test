@@ -42,12 +42,18 @@ jobs:
 
     - name: Run JMeter test
       run: |
-        docker run --rm \
+       # Obtén el nombre de la red Docker creada por Docker Compose (puede ser dummy-app_default)
+       NETWORK_NAME=$(docker network ls --filter name=dummy-app_default -q)
+        echo "Using network: $NETWORK_NAME"
+
+       # Corre JMeter en esa red para que pueda resolver 'app-dummy'
+       docker run --rm \
+         --network $NETWORK_NAME \
           -v ${{ github.workspace }}/jmeter:/tests \
           -w /tests \
           justb4/jmeter \
-          -n -t test-plan.jmx -Jtarget_host=app-dummy \
-          -l results.jtl \
+         -n -t test-plan.jmx -Jtarget_host=app-dummy \
+         -l results.jtl \
           -e -o report
 
     - name: Upload HTML Report
