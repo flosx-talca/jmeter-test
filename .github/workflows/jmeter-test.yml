@@ -39,29 +39,16 @@ jobs:
           echo "Waiting for API..."
           sleep 5
         done
-    - name: Check dummy-app logs
-      working-directory: ./dummy-app
+
+    - name: Run JMeter test
       run: |
-        docker compose logs app-dummy
-
-    - name: Ejecutar JMeter
-      run: |
-        # Obtener el nombre base del repo (nombre carpeta)
-        REPO_NAME=$(basename $GITHUB_WORKSPACE)
-        # Construir el nombre de la red que crea docker compose
-        NETWORK_NAME="${REPO_NAME}_default"
-
-        echo "Usando red Docker: $NETWORK_NAME"
-
         docker run --rm \
-          --network $NETWORK_NAME \
-          -v $GITHUB_WORKSPACE/jmeter:/tests \
+          -v ${{ github.workspace }}/jmeter:/tests \
           -w /tests \
           justb4/jmeter \
-          -n -t test-plan.jmx -Jtarget_host=app-dummy \
+          -n -t test-plan.jmx \
           -l results.jtl \
           -e -o report
-
 
     - name: Upload HTML Report
       uses: actions/upload-artifact@v4
