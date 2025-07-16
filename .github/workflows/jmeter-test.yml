@@ -43,8 +43,8 @@ jobs:
     - name: Run JMeter test
       run: |
         docker run --rm \
-          --network jmeter-net \
-          -v ${{ github.workspace }}/jmeter:/tests \
+          
+          -v ./jmeter:/tests \
           -w /tests \
           justb4/jmeter \
           -n -t test-plan.jmx -Jtarget_host=app-dummy \
