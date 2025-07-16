@@ -43,7 +43,6 @@ jobs:
     - name: Run JMeter test
       run: |
         docker run --rm \
-        --network dummy-app_jmeter-net \
         -v ${{ github.workspace }}/jmeter:/tests \
         -w /tests \
         justb4/jmeter \
@@ -51,6 +50,7 @@ jobs:
         -Jtarget_host=app-dummy \
         -l results.jtl \
         -e -o report
+
 
     - name: Upload HTML Report
       uses: actions/upload-artifact@v4
