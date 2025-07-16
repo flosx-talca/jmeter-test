@@ -18,6 +18,11 @@ jobs:
     steps:
     - name: Checkout repo
       uses: actions/checkout@v4
+    
+    - name: Print Runner Hostname # Nuevo paso para imprimir el hostname
+      run: |
+        echo "Hostname del runner: $(hostname)"
+        echo "Dirección IP del runner: $(hostname -I | awk '{print $1}')" # Muestra la primera IP
 
     - name: Start dummy app with Docker Compose
       run: |
