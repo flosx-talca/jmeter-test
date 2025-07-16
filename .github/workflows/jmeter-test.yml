@@ -41,7 +41,7 @@ jobs:
         done
 
     - name: Run JMeter test (on Docker network)
-      run: |
+       run: |
         docker run --rm \
         --network dummy-app_jmeter-net \
         -v ${{ github.workspace }}/jmeter:/tests \
