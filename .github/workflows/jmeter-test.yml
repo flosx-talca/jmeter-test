@@ -46,11 +46,16 @@ jobs:
 
     - name: Ejecutar JMeter
       run: |
-        # Obtener el nombre de la red que creó docker compose
-        NETWORK=$(docker network ls --filter name=${{ github.workspace##*/ }}_default -q)
+        # Obtener el nombre base del repo (nombre carpeta)
+        REPO_NAME=$(basename $GITHUB_WORKSPACE)
+        # Construir el nombre de la red que crea docker compose
+        NETWORK_NAME="${REPO_NAME}_default"
+
+        echo "Usando red Docker: $NETWORK_NAME"
+
         docker run --rm \
-          --network $NETWORK \
-          -v ${{ github.workspace }}/jmeter:/tests \
+          --network $NETWORK_NAME \
+          -v $GITHUB_WORKSPACE/jmeter:/tests \
           -w /tests \
           justb4/jmeter \
           -n -t test-plan.jmx -Jtarget_host=app-dummy \
