@@ -10,6 +10,7 @@ app.post('/api/echo', (req, res) => {
     res.json({ received: req.body });
 });
 
-app.listen(3000, () => {
-    console.log('API dummy listening at http://localhost:3000');
+
+app.listen(3000, '0.0.0.0', () => {
+  console.log(`App listening at http://0.0.0.0:${port}`);
 });
