@@ -55,6 +55,10 @@ jobs:
         -l results.jtl \
         -e -o report
 
+    - name: Show JMeter results summary
+      run: |
+        head -n 20 results.jtl
+
     - name: Upload HTML Report
       uses: actions/upload-artifact@v4
       with:
