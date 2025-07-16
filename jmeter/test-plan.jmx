@@ -7,7 +7,7 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="target_host" elementType="Argument">
             <stringProp name="Argument.name">target_host</stringProp>
-            <stringProp name="Argument.value">http://localhost:3000</stringProp>
+            <stringProp name="Argument.value">localhost</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
@@ -27,6 +27,8 @@
       </ThreadGroup>
       <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ApiUsuario">
+          <stringProp name="HTTPSampler.domain">${target_host}</stringProp>
+          <stringProp name="HTTPSampler.port">3000</stringProp>
           <stringProp name="HTTPSampler.path">/api/ping</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -82,7 +84,7 @@
         </ResultCollector>
         <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request">
-          <stringProp name="HTTPSampler.domain">${__P(target_host,)}</stringProp>
+          <stringProp name="HTTPSampler.domain">${target_host}</stringProp>
           <stringProp name="HTTPSampler.port">3000</stringProp>
           <stringProp name="HTTPSampler.path">/api/echo</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -208,7 +210,7 @@
         </hashTree>
       </hashTree>
       <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults">
-        <stringProp name="HTTPSampler.domain">${__P(target_host,)}</stringProp>
+        <stringProp name="HTTPSampler.domain">${target_host}</stringProp>
         <stringProp name="HTTPSampler.port">3000</stringProp>
         <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
           <collectionProp name="Arguments.arguments"/>
