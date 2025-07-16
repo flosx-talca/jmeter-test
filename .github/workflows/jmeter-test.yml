@@ -44,16 +44,18 @@ jobs:
       run: |
         docker compose logs app-dummy
 
-    - name: Run JMeter test (on Docker network)
+    - name: Ejecutar JMeter
       run: |
+        # Obtener el nombre de la red que creó docker compose
+        NETWORK=$(docker network ls --filter name=${{ github.workspace##*/ }}_default -q)
         docker run --rm \
-        --network dummy-app_jmeter-net \
-        -v ${{ github.workspace }}/jmeter:/tests \
-        -w /tests \
-        justb4/jmeter \
-        -n -t test-plan.jmx -Jtarget_host=app-dummy \
-        -l results.jtl \
-        -e -o report
+          --network $NETWORK \
+          -v ${{ github.workspace }}/jmeter:/tests \
+          -w /tests \
+          justb4/jmeter \
+          -n -t test-plan.jmx -Jtarget_host=app-dummy \
+          -l results.jtl \
+          -e -o report
 
 
     - name: Upload HTML Report
