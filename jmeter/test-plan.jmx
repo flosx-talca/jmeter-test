@@ -27,7 +27,7 @@
       </ThreadGroup>
       <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ApiUsuario">
-          <stringProp name="HTTPSampler.domain">TARGET_HOST_URL</stringProp>
+          <stringProp name="HTTPSampler.domain">${TARGET_HOST_URL}</stringProp>
           <stringProp name="HTTPSampler.port">3000</stringProp>
           <stringProp name="HTTPSampler.path">/api/ping</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
