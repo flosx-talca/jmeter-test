@@ -46,7 +46,7 @@ jobs:
           -v ${{ github.workspace }}/jmeter:/tests \
           -w /tests \
           justb4/jmeter \
-          -n -t test-plan.jmx \
+          -n -t test-plan.jmx -Jtarget_host=app-dummy \
           -l results.jtl \
           -e -o report
 
