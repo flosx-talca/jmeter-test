@@ -1,0 +1,52 @@
+name: JMeter Performance Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  performance-test:
+    runs-on: ubuntu-latest
+
+    services:
+      docker:
+        image: docker:20.10.7
+        options: --privileged
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Start dummy app with Docker Compose
+      run: |
+        cd app-dummy
+        docker compose up -d --build
+
+    - name: Wait for the API to be ready
+      run: |
+        for i in {1..10}; do
+          if curl -s http://localhost:3000/api/ping | grep -q pong; then
+            echo "API is up ✅"
+            break
+          fi
+          echo "Waiting for API..."
+          sleep 5
+        done
+
+    - name: Run JMeter test
+      run: |
+        docker run --rm \
+          -v ${{ github.workspace }}/jmeter:/tests \
+          -w /tests \
+          justb4/jmeter \
+          -n -t test-plan.jmx \
+          -l results.jtl \
+          -e -o report
+
+    - name: Upload HTML Report
+      uses: actions/upload-artifact@v4
+      with:
+        name: jmeter-html-report
+        path: jmeter/report
