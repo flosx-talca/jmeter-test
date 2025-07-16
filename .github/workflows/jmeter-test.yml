@@ -21,7 +21,7 @@ jobs:
 
     - name: Start dummy app with Docker Compose
       run: |
-        cd app-dummy
+        cd dummy-app
         docker compose up -d --build
 
     - name: Wait for the API to be ready
