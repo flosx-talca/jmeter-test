@@ -40,15 +40,16 @@ jobs:
           sleep 5
         done
 
-    - name: Run JMeter test
+    - name: Run JMeter test (on Docker network)
       run: |
         docker run --rm \
-          -v ${{ github.workspace }}/jmeter:/tests \
-          -w /tests \
-          justb4/jmeter \
-          -n -t test-plan.jmx  -Jtarget_host=localhost \
-          -l results.jtl \
-          -e -o report
+        --network dummy-app_jmeter-net \
+        -v ${{ github.workspace }}/jmeter:/tests \
+        -w /tests \
+        justb4/jmeter \
+        -n -t test-plan.jmx -Jtarget_host=app-dummy \
+        -l results.jtl \
+        -e -o report
 
     - name: Upload HTML Report
       uses: actions/upload-artifact@v4
